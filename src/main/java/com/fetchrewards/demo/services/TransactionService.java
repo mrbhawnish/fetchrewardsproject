@@ -9,5 +9,5 @@ public interface TransactionService
 {
     List<Transaction> findAllTrans();
 
-    void save(long payerid, Transaction transaction);
+    Transaction save(long payerid, Transaction transaction);
 }

@@ -26,7 +26,7 @@ public class PayerServiceImpl implements PayerService
     }
 
     @Override
-    public void save(Payer payer)
+    public Payer save(Payer payer)
     {
 
       Payer currentPayer =  payerrepos.findByPayername(payer.getPayername());
@@ -39,6 +39,6 @@ public class PayerServiceImpl implements PayerService
 
         newPayer.setPayername(payer.getPayername());
 
-        payerrepos.save(newPayer);
+       return payerrepos.save(newPayer);
     }
 }

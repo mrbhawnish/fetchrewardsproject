@@ -33,15 +33,19 @@ public class TransactionServiceImpl
     }
 
     @Override
-    public void save(long payerid, Transaction transaction)
+    public Transaction save(long payerid, Transaction transaction)
     {
         Payer currentPayer = payerRepos.findById(payerid).orElseThrow(() -> new ResourceNotFoundException("Sorry the payer with id " + payerid + " Not Found."));
 
-        Transaction newTransaction = new Transaction(transaction.getPoints(), currentPayer);
-
-        transRepos.save(newTransaction);
+        if(currentPayer.getPoints() + transaction.getPoints() >= 0)
+        {
+            currentPayer.setPoints(currentPayer.getPoints() + transaction.getPoints());
+            Transaction newTransaction = new Transaction(transaction.getPoints(), currentPayer);
+            return  transRepos.save(newTransaction);
+        }
+        else {
+            throw new IllegalStateException("Sorry you do not have enough points to subtract");
+        }
 
     }
-
-
 }
