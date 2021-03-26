@@ -3,15 +3,17 @@ package com.fetchrewards.demo.models;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+
 
 @Entity
 @Table(name = "points")
 public class Point
 {
-    @Transient
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long pointid;
+
     private int points;
 
     public Point()
@@ -21,6 +23,16 @@ public class Point
     public Point(int points)
     {
         this.points = points;
+    }
+
+    public long getPointid()
+    {
+        return pointid;
+    }
+
+    public void setPointid(long pointid)
+    {
+        this.pointid = pointid;
     }
 
     public int getPoints()
