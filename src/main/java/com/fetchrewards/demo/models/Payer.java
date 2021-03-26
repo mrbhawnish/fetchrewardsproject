@@ -77,4 +77,13 @@ public class Payer
     {
         this.transactions = transactions;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Payer{" +
+            "payername='" + payername + '\'' +
+            ", points=" + points +
+            '}';
+    }
 }

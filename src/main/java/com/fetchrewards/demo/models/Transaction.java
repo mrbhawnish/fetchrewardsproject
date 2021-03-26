@@ -1,8 +1,10 @@
 package com.fetchrewards.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transactions")
@@ -13,6 +15,9 @@ public class Transaction
     private long transactionid;
 
     private int points;
+
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
 
     @ManyToOne
     @JoinColumn(name = "payerid", nullable = false)
@@ -59,5 +64,15 @@ public class Transaction
     public void setPayer(Payer payer)
     {
         this.payer = payer;
+    }
+
+    public LocalDateTime getCreateDateTime()
+    {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(LocalDateTime createDateTime)
+    {
+        this.createDateTime = createDateTime;
     }
 }

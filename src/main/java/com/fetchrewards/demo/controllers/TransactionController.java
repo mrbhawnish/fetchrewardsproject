@@ -23,7 +23,7 @@ public class TransactionController
     @Autowired
     TransactionService transService;
 
-    @PostMapping(value="{payer/{payerid}/newtransaction",
+    @PostMapping(value="payer/{payerid}/newtransaction",
         consumes = {"application/json"}, produces = "application/json")
     public ResponseEntity<?> addTransaction(@PathVariable long payerid,
                                             @Valid

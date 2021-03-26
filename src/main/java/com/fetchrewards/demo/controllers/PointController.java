@@ -1,6 +1,7 @@
 package com.fetchrewards.demo.controllers;
 
 
+import com.fetchrewards.demo.models.Payer;
 import com.fetchrewards.demo.models.Point;
 import com.fetchrewards.demo.services.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 public class PointController
@@ -22,7 +27,9 @@ public class PointController
     public ResponseEntity<?> spendPoints(@Valid @RequestBody
                                          Point points)
     {
-        pointService.save(points);
-        return new ResponseEntity<>(null, null, HttpStatus.CREATED);
+        Set<Payer> newPayers =  new HashSet<>();
+        points.setPointid(0);
+        newPayers = pointService.save(points);
+        return new ResponseEntity<>(newPayers, null, HttpStatus.CREATED);
     }
 }

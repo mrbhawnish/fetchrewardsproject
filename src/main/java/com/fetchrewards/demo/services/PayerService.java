@@ -8,5 +8,6 @@ import java.util.List;
 public interface PayerService
 {
     List<Payer> allPayers();
+
     Payer save(Payer payer);
 }
