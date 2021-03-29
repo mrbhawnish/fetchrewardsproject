@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class PointController
@@ -27,7 +24,7 @@ public class PointController
     public ResponseEntity<?> spendPoints(@Valid @RequestBody
                                          Point points)
     {
-        Set<Payer> newPayers =  new HashSet<>();
+        Map<String, Integer> newPayers = new HashMap<>();
         points.setPointid(0);
         newPayers = pointService.save(points);
         return new ResponseEntity<>(newPayers, null, HttpStatus.CREATED);
