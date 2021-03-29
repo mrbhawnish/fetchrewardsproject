@@ -1,8 +1,11 @@
 package com.fetchrewards.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class Payer
     @JsonIgnoreProperties(value = "payer",
     allowSetters = true)
     private List<Transaction> transactions = new ArrayList<>();
+
+    @CreationTimestamp
+    private LocalDateTime createdDateTime;
 
     public Payer()
     {
@@ -76,6 +82,16 @@ public class Payer
     public void setTransactions(List<Transaction> transactions)
     {
         this.transactions = transactions;
+    }
+
+    public LocalDateTime getCreatedDateTime()
+    {
+        return createdDateTime;
+    }
+
+    public void setCreatedDateTime(LocalDateTime createdDateTime)
+    {
+        this.createdDateTime = createdDateTime;
     }
 
     @Override
