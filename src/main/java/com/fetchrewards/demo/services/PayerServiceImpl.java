@@ -5,6 +5,7 @@ import com.fetchrewards.demo.repository.PayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +32,9 @@ public class PayerServiceImpl implements PayerService
 
       Payer currentPayer =  payerrepos.findByPayername(payer.getPayername());
 
-      if(currentPayer.getPayername() == payer.getPayername())
+      if(currentPayer != null)
       {
-          throw new IllegalStateException("Sorry payer already exists");
+          throw new ResourceAccessException("Sorry payer already exists");
       }
         Payer newPayer = new Payer();
 

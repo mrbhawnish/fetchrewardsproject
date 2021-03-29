@@ -3,6 +3,7 @@ package com.fetchrewards.demo.controllers;
 import com.fetchrewards.demo.models.Payer;
 import com.fetchrewards.demo.repository.PayerRepository;
 import com.fetchrewards.demo.services.PayerService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,12 @@ public class PayerController
 {
     @Autowired
     PayerService payerService;
+
+    @GetMapping(value = "", produces = "application/json")
+    public String defaultEnd()
+    {
+        return "Welcome";
+    }
 
     @GetMapping(value = "/allpayers",
         produces = {"application/json"})

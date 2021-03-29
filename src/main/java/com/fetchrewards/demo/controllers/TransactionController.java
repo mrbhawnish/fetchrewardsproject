@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class TransactionController
@@ -23,7 +22,15 @@ public class TransactionController
     @Autowired
     TransactionService transService;
 
-    @PostMapping(value="{payer/{payerid}/newtransaction",
+    @GetMapping(value="alltransactions", produces="application/json")
+    public ResponseEntity<?> allTransactions()
+    {
+        List<Transaction> transList = new ArrayList<>();
+        transService.findAllTrans().iterator().forEachRemaining(transList::add);
+        return new ResponseEntity<>(transList, HttpStatus.OK);
+    }
+
+    @PostMapping(value="payer/{payerid}/newtransaction",
         consumes = {"application/json"}, produces = "application/json")
     public ResponseEntity<?> addTransaction(@PathVariable long payerid,
                                             @Valid
